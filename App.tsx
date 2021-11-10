@@ -1,16 +1,15 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import Navigation from './src/navigation/Navigation';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Text>Componente principal</Text>
+      <Navigation/>
     </NavigationContainer>
   )
 }
 
 export default App
 
-const styles = StyleSheet.create({})

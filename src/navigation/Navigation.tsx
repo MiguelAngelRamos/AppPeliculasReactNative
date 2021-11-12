@@ -3,8 +3,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
+import { Movie } from '../interfaces/movieInterface';
+// type lo usamos cuando sabemos que no van hacer extendidos
+export type RootStackParams = {
+  HomeScreen: undefined, // no recibe ningun parametro
+  DetailScreen: Movie
+}
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParams>();
+
+
 
 const Navigation = () => {
   return (

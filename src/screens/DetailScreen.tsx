@@ -1,7 +1,9 @@
-import { StackScreenProps } from '@react-navigation/stack'
-import React from 'react'
-import { ScrollView, StyleSheet, Text, View, Image, Dimensions } from 'react-native'
-import { RootStackParams } from '../navigation/Navigation'
+import { StackScreenProps } from '@react-navigation/stack';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, View, Image, Dimensions, ActivityIndicator } from 'react-native';
+import { RootStackParams } from '../navigation/Navigation';
+import { useMovieDetails } from '../hooks/useMovieDetails';
+import MovieDetails from '../components/MovieDetails';
 
 
 // no importa que tan grande es la pantalla siempre voy a tomar el 100% height
@@ -13,6 +15,8 @@ const DetailScreen = ({ route, navigation}: Props) => {
   // console.log(route.params)
   const movie = route.params;
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+  const {isLoading, cast, movieFull} = useMovieDetails(movie.id);
  
   return (
     <ScrollView>
@@ -28,6 +32,11 @@ const DetailScreen = ({ route, navigation}: Props) => {
       <View style={styles.marginContainer}>
         <Text>{movie.original_title}</Text>
       </View>
+
+      {/* Detalles de la movie actores CreditsResponse */}
+      {
+        isLoading? <ActivityIndicator size={35} color="grey" style={{ marginTop: 20}}/>: <MovieDetails movieFull={movieFull!} cast={cast}/>
+      }
     </ScrollView>
   )
 }
